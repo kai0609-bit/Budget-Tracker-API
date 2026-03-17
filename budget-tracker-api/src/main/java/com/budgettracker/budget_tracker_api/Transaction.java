@@ -16,7 +16,7 @@ public class Transaction {
     private int month;
 
     // Constructors
-    Transaction () {}
+    public Transaction () {}
 
     Transaction (String description, double amount, String category, int month) {
         if (amount == 0) {
