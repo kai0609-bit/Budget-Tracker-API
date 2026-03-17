@@ -9,8 +9,10 @@
         <module name="budget-tracker-api" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="budget-tracker-api" target="1.5" />
-    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="budget-tracker-api" options="-parameters" />
+    </option>
   </component>
 </project>
