@@ -1,4 +1,4 @@
-package com.budgettracker;
+package com.budgettracker.budget_tracker_api;
 
 import java.util.Optional;
 
