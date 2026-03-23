@@ -29,4 +29,4 @@ jobs:
         run: cp target/budget-tracker-api-0.0.1-SNAPSHOT.jar ~/budget-tracker-api-0.0.1-SNAPSHOT.jar
 
       - name: Restart Service
-        run: sudo systemctl restart budget-tracker-api
+        run: sudo systemctl restart budget-tracker
