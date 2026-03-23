@@ -21,9 +21,11 @@ jobs:
 
       - name: Build JAR
         run: ./mvnw clean package -DskipTests
+        working-directory: budget-tracker-api
 
       - name: Copy JAR
         run: cp target/budget-tracker-api-0.0.1-SNAPSHOT.jar ~/budget-tracker-api-0.0.1-SNAPSHOT.jar
+        working-directory: budget-tracker-api
 
       - name: Restart Service
-        run: sudo systemctl restart budget-tracker-API
+        run: sudo systemctl restart budget-tracker-api
