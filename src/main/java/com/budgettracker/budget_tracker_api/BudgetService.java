@@ -34,6 +34,18 @@ public class BudgetService {
         budgetRepository.deleteById(id);
     }
 
+    public Transaction updateTransaction(long id, TransactionRequest request) {
+        Transaction transaction = budgetRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction not found"));
+
+        transaction.setDescription(request.getDescription());
+        transaction.setAmount(request.getAmount());
+        transaction.setCategory(request.getCategory());
+        transaction.setMonth(request.getMonth());
+
+        return budgetRepository.save(transaction);
+    }
+
     public Optional<Transaction> findById(long id) {return budgetRepository.findById(id); }
 
     public Map<String, Double> getStatus() {

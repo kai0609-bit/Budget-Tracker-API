@@ -39,6 +39,13 @@ public class TransactionController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/transactions/{id}")
+    public ResponseEntity<Transaction> updateTransaction(@PathVariable long id, @RequestBody TransactionRequest request) {
+        Transaction updatedTransaction = budgetService.updateTransaction(id, request);
+
+        return ResponseEntity.ok(updatedTransaction);
+    }
+
     @GetMapping("/find")
     public Optional<Transaction> findById(@RequestParam long id) {
         return budgetService.findById(id);
