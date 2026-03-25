@@ -1,9 +1,8 @@
 package com.budgettracker.budget_tracker_api;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -23,9 +22,21 @@ public class TransactionController {
         return budgetService.getAllTransactions();
     }
 
-    @PostMapping("/add")
-    public void addTask(@RequestParam String description, @RequestParam double amount, @RequestParam String category, @RequestParam int month) {
-        budgetService.addTransaction(description, amount, category, month);
+    @PostMapping("/transactions")
+    public ResponseEntity<Transaction> addTransaction(@RequestBody TransactionRequest request) {
+        Transaction savedTransaction = budgetService.addTransaction(
+                request.getDescription(),
+                request.getAmount(),
+                request.getCategory(),
+                request.getMonth()
+        );
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedTransaction);
+    }
+
+    @DeleteMapping("/transactions/{id}")
+    public ResponseEntity<Void> deleteTransaction(@PathVariable long id) {
+        budgetService.removeTransaction(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/find")

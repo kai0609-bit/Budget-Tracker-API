@@ -1,6 +1,8 @@
 package com.budgettracker.budget_tracker_api;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,9 +22,16 @@ public class BudgetService {
         return budgetRepository.findAll();
     }
 
-    public void addTransaction(String description, double amount, String category, int month) {
+    public Transaction addTransaction(String description, double amount, String category, int month) {
         Transaction transaction = new Transaction(description, amount, category, month);
-        budgetRepository.save(transaction);
+        return budgetRepository.save(transaction);
+    }
+
+    public void removeTransaction(long id) {
+        if (!budgetRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction not found");
+        }
+        budgetRepository.deleteById(id);
     }
 
     public Optional<Transaction> findById(long id) {return budgetRepository.findById(id); }
